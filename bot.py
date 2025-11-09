@@ -18,3 +18,18 @@ app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("scan", scan))
 
 app.run_polling()
+
+import threading
+import http.server
+import socketserver
+
+def keep_alive():
+    handler = http.server.SimpleHTTPRequestHandler
+    with socketserver.TCPServer(("", 8080), handler) as httpd:
+        httpd.serve_forever()
+
+threading.Thread(target=keep_alive, daemon=True).start()
+
+# Your actual bot logic below
+print("Bot starting...")
+# ... rest of bot code ...
