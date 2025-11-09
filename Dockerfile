@@ -1,3 +1,11 @@
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN npm install
+EXPOSE 8080
+CMD ["npm", "start"]
+
+
 # Use the official lightweight Python image
 FROM python:3.10-slim
 
